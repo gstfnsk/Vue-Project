@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./vue.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  Teste Live Server
+  <div id="app">
+    <!-- ou class="app" e daí a seleção seria com . ao invés de # -->
+    {{ somar() }}<br>
+    {{ subtrair() }}<br>
+    {{ multiplicar() }}<br>
+    {{ dividir() }}<br>
+    <!-- acesso aos atributos definidos em data -->
+  </div>
+</body>
+<script>
+  options = {
+    el: '#app',
+    data: { // guarda variáveis e atributos reativos
+      message: 'Primeiro template controlado pelo vue',
+      // recuperar os métodos em data:
+      n1: 10,
+      n2: 5
+    },
+    methods: {
+      somar: function somar() {
+        return this.n1 + this.n2
+      },
+      subtrair: function () { // anônima
+        return this.n1 - this.n2;
+      },
+      multiplicar: () => { // arrow
+        return this.n1 * this.n2 //aqui não funciona
+      },
+      dividir() { // forma enxuta, equivalente a dividir: function dividir() {}
+        return this.n1 / this.n2
+      }
+    }
+  } // na prática, esses atributos já são passados diretamente ao vue como parâmetro na instância do new Vue(), sem serem atribuídos a uma variável
+
+  const vm = new Vue(options); //vm = ViewModel (não obrigatório)
+  console.log(vm)
+
+</script>
+
+</html>
