@@ -6,6 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="./vue.js"></script>
   <title>Document</title>
+  <style>
+    .vermelho {
+      color: red;
+    }
+
+    .negrito {
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
@@ -17,6 +26,12 @@
     {{ multiplicar() }}<br>
     {{ dividir() }}<br>
     <!-- acesso aos atributos definidos em data -->
+    <a :href="site">Site</a>
+    <p :class="cor" class="negrito">Entendendo a diretiva v-bind</p>
+    <input type="text" :placeholder="instrucaodepreenchimento" :value="valor">
+    <input type="checkbox" :checked="check">
+    <input type="text" v-on:keyup="imprimirTexto()">
+    <button @click="imprimirMensagemAlerta()">Botão</button>
   </div>
 </body>
 <script>
@@ -26,7 +41,12 @@
       message: 'Primeiro template controlado pelo vue',
       // recuperar os métodos em data:
       n1: 10,
-      n2: 5
+      n2: 5,
+      site: 'http://google.com',
+      cor: 'vermelho',
+      instrucaodepreenchimento: 'placeholder diretiva v-bind',
+      valor: 'teste',
+      check: true
     },
     methods: {
       somar: function somar() {
@@ -40,9 +60,17 @@
       },
       dividir() { // forma enxuta, equivalente a dividir: function dividir() {}
         return this.n1 / this.n2
+      },
+      imprimirTexto() {
+        console.log('texto')
+      },
+      imprimirMensagemAlerta() {
+        alert('Alerta');
       }
-    }
-  } // na prática, esses atributos já são passados diretamente ao vue como parâmetro na instância do new Vue(), sem serem atribuídos a uma variável
+    },
+  }
+
+  // na prática, esses atributos (de options) já são passados diretamente ao vue como parâmetro na instância do new Vue(), sem serem atribuídos a uma variável
 
   const vm = new Vue(options); //vm = ViewModel (não obrigatório)
   console.log(vm)
