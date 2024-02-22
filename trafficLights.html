@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./vue.js"></script>
+  <title>Document</title>
+  <style>
+    .red-light {
+      color: rgb(207, 0, 0);
+    }
+
+    .green-light {
+      font-weight: rgb(100, 255, 100);
+    }
+
+    .yellow-light {
+      font-weight: rgb(255, 221, 72);
+    }
+
+    .defaultColor {
+      background-color: black;
+    }
+
+    .inner-circle {
+      border-radius: 100%;
+      width: 100px;
+      height: 100px;
+      position: relative;
+      color: black;
+      border-style: solid;
+      margin: auto;
+    }
+
+    .circle-wrapper {
+      border-radius: 25%;
+      width: 200px;
+      height: 400px;
+      position: absolute;
+      color: darkgoldenrod;
+      border-style: solid;
+      display: grid;
+      background-color: goldenrod;
+    }
+
+    .control-wrapper {
+      position: absolute;
+      width: 200px;
+      height: 300px;
+      margin-top: 200px;
+      margin-left: 300px;
+    }
+
+    .main-button {
+      border-radius: 30%;
+      width: 30px;
+      height: 30px;
+      position: relative;
+      color: gray;
+      display: flex;
+      border-style: solid;
+      background-color: gray;
+      margin-left: 40px;
+    }
+
+    .main-sign {
+      margin-top: 10px;
+      color: black;
+      position: relative;
+      display: flex;
+      width: 120px;
+      border-style: solid;
+      border-color: gray;
+      font-family: system-ui;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="circle-wrapper">
+      <div class="inner-circle defaultColor" @click="turnOn"> </div>
+      <div class="inner-circle defaultColor"> </div>
+      <div class="inner-circle defaultColor"> </div>
+    </div>
+    <div class="control-wrapper">
+      <div class="main-button"></div>
+      <div class="main-sign">
+        Click to change the traffic light
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  options = {
+    el: '#app',
+    data: {
+      defaultColor: defaultColor,
+    },
+    methods: {
+      turnOn: {
+
+      },
+
+    },
+  }
+
+  const vm = new Vue(options);
+  console.log(vm)
+
+</script>
+
+</html>
