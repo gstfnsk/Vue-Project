@@ -8,15 +8,19 @@
   <title>Document</title>
   <style>
     .red-light {
-      color: rgb(207, 0, 0);
+      background-color: rgb(207, 0, 0) !important;
     }
 
     .green-light {
-      font-weight: rgb(100, 255, 100);
+      background-color: rgb(65, 133, 63) !important;
     }
 
     .yellow-light {
-      font-weight: rgb(255, 221, 72);
+      background-color: rgb(255, 221, 72) !important;
+    }
+
+    .light-gray {
+      background-color: lightgray !important;
     }
 
     .defaultColor {
@@ -80,12 +84,14 @@
 <body>
   <div id="app">
     <div class="circle-wrapper">
-      <div class="inner-circle defaultColor" @click="turnOn"> </div>
-      <div class="inner-circle defaultColor"> </div>
-      <div class="inner-circle defaultColor"> </div>
+      <div class="inner-circle defaultColor" :class="color"></div>
+      <div class="inner-circle defaultColor" :class="color"> </div>
+      <div class="inner-circle defaultColor" :class="color"> </div>
     </div>
     <div class="control-wrapper">
-      <div class="main-button"></div>
+      <div @click="changeState()" @mouseover="changeButtonColor()" @mouseout="resetButtonColor" :class="buttonColor"
+        class="main-button">
+      </div>
       <div class="main-sign">
         Click to change the traffic light
       </div>
@@ -96,13 +102,43 @@
   options = {
     el: '#app',
     data: {
-      defaultColor: defaultColor,
+      color: 'defaultColor',
+      buttonColor: '',
+      clickCount: 0,
     },
     methods: {
-      turnOn: {
+      changeState() {
+        if (this.color === 'defaultColor') {
+          this.color = 'red-light';
+          turnOff()
+          turnOff()
+        } else if (this.color === 'red-light') {
+          this.color = 'green-light';
+          turnOff()
+          turnOff()
+        } else if (this.color === 'green-light') {
+          this.color = 'yellow-light';
+          turnOff()
+          turnOff()
+        } else if (this.color === 'yellow-light') {
+          this.color = 'red-light';
+        }
+      },
+      turnOn(light) {
 
       },
+      turnOff(light) {
 
+      },
+      changeButtonColor() {
+        this.buttonColor = 'light-gray'
+      },
+      resetButtonColor() {
+        this.buttonColor = '';
+      },
+      incrementClickCount() {
+        this.clickCount++;
+      },
     },
   }
 
