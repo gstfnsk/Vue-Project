@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./vue.js"></script>
+  <title>Document</title>
+  <style>
+    .red-light {
+      background-color: rgb(207, 0, 0) !important;
+    }
+
+    .green-light {
+      background-color: rgb(65, 133, 63) !important;
+    }
+
+    .yellow-light {
+      background-color: rgb(255, 221, 72) !important;
+    }
+
+    .light-gray {
+      background-color: lightgray !important;
+    }
+
+    .defaultColor {
+      background-color: black;
+    }
+
+    .inner-circle {
+      border-radius: 100%;
+      width: 100px;
+      height: 100px;
+      position: relative;
+      color: black;
+      border-style: solid;
+      margin: auto;
+    }
+
+    .circle-wrapper {
+      border-radius: 25%;
+      width: 200px;
+      height: 400px;
+      position: absolute;
+      color: darkgoldenrod;
+      border-style: solid;
+      display: grid;
+      background-color: goldenrod;
+    }
+
+    .control-wrapper {
+      position: absolute;
+      width: 200px;
+      height: 300px;
+      margin-top: 200px;
+      margin-left: 300px;
+    }
+
+    .main-button {
+      border-radius: 30%;
+      width: 30px;
+      height: 30px;
+      position: relative;
+      color: gray;
+      display: flex;
+      border-style: solid;
+      background-color: gray;
+      margin-left: 40px;
+    }
+
+    .main-sign {
+      margin-top: 10px;
+      color: black;
+      position: relative;
+      display: flex;
+      width: 120px;
+      border-style: solid;
+      border-color: gray;
+      font-family: system-ui;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="circle-wrapper">
+      <div class="inner-circle defaultColor" :class="color"></div>
+      <div class="inner-circle defaultColor" :class="color"> </div>
+      <div class="inner-circle defaultColor" :class="color"> </div>
+    </div>
+    <div class="control-wrapper">
+      <div @click="changeState()" @mouseover="changeButtonColor()" @mouseout="resetButtonColor" :class="buttonColor"
+        class="main-button">
+      </div>
+      <div class="main-sign">
+        Click to change the traffic light
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  options = {
+    el: '#app',
+    data: {
+      color: 'defaultColor',
+      buttonColor: '',
+      clickCount: 0,
+    },
+    methods: {
+      changeState() {
+        if (this.color === 'defaultColor') {
+          this.color = 'red-light';
+          turnOff()
+          turnOff()
+        } else if (this.color === 'red-light') {
+          this.color = 'green-light';
+          turnOff()
+          turnOff()
+        } else if (this.color === 'green-light') {
+          this.color = 'yellow-light';
+          turnOff()
+          turnOff()
+        } else if (this.color === 'yellow-light') {
+          this.color = 'red-light';
+        }
+      },
+      turnOn(light) {
+
+      },
+      turnOff(light) {
+
+      },
+      changeButtonColor() {
+        this.buttonColor = 'light-gray'
+      },
+      resetButtonColor() {
+        this.buttonColor = '';
+      },
+      incrementClickCount() {
+        this.clickCount++;
+      },
+    },
+  }
+
+  const vm = new Vue(options);
+  console.log(vm)
+
+</script>
+
+</html>
