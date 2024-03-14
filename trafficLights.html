@@ -84,9 +84,9 @@
 <body>
   <div id="app">
     <div class="circle-wrapper">
-      <div class="inner-circle defaultColor" :class="color"></div>
-      <div class="inner-circle defaultColor" :class="color"> </div>
-      <div class="inner-circle defaultColor" :class="color"> </div>
+      <div class="inner-circle defaultColor" :class="redOn"></div>
+      <div class="inner-circle defaultColor" :class="yellowOn"> </div>
+      <div class="inner-circle defaultColor" :class="greenOn"> </div>
     </div>
     <div class="control-wrapper">
       <div @click="changeState()" @mouseover="changeButtonColor()" @mouseout="resetButtonColor" :class="buttonColor"
@@ -102,42 +102,36 @@
   options = {
     el: '#app',
     data: {
-      color: 'defaultColor',
       buttonColor: '',
-      clickCount: 0,
+      redOn: '',
+      yellowOn: '',
+      greenOn: '',
     },
     methods: {
       changeState() {
-        if (this.color === 'defaultColor') {
-          this.color = 'red-light';
-          turnOff()
-          turnOff()
-        } else if (this.color === 'red-light') {
-          this.color = 'green-light';
-          turnOff()
-          turnOff()
-        } else if (this.color === 'green-light') {
-          this.color = 'yellow-light';
-          turnOff()
-          turnOff()
-        } else if (this.color === 'yellow-light') {
-          this.color = 'red-light';
+        if ((this.redOn === '' && this.yellowOn === '' && this.greenOn === '')) {
+          this.redOn = 'red-light';
+        } else if (this.redOn) {
+          this.resetLight();
+          this.greenOn = 'green-light';
+        } else if (this.greenOn) {
+          this.resetLight();
+          this.yellowOn = 'yellow-light';
+        } else if (this.yellowOn) {
+          this.resetLight();
+          this.redOn = 'red-light';
         }
       },
-      turnOn(light) {
-
-      },
-      turnOff(light) {
-
+      resetLight() {
+        this.redOn = '';
+        this.yellowOn = '';
+        this.greenOn = '';
       },
       changeButtonColor() {
         this.buttonColor = 'light-gray'
       },
       resetButtonColor() {
         this.buttonColor = '';
-      },
-      incrementClickCount() {
-        this.clickCount++;
       },
     },
   }
